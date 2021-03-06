@@ -1,6 +1,4 @@
-import java.util.Scanner;
-
-public class GameRunner extends Main {  // I made it a subclass to get easy access to my input system
+public class GameRunner extends Main {  // I made it a subclass to get easy access to my input system and dev mode
 	/*
 	 * this is an immutable inventory from which objects can copy
 	 * note to self - DO NOT ALTER (alter the instance vars instead)
@@ -19,6 +17,7 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 
 	public GameRunner(String name) {
 		this.name = name;
+		greet();
 		reset();
 	}
 
@@ -27,6 +26,7 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 		this.capitals = copy(CLASS_RESOURCE_CAPITALS);
 		updateRange();
 		streak = 0;
+		System.out.println("Begin.");
 	}
 
 	public void greet() {
@@ -112,7 +112,7 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 	}
 
 	// essentially shifts all the null indexes to the end of the array
-	private static String[] consolidate(String[] arr) {
+	private static void consolidate(String[] arr) {
 		for (int i = 0; i < arr.length; i++) {
 			if (arr[i] == null) {
 				for(int j = i; j < arr.length; j++) {
@@ -124,6 +124,5 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 				}
 			}
 		}
-		return arr;
 	}
 }
