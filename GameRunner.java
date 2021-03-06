@@ -11,13 +11,15 @@ public class GameRunner {
 	private static final String[] CLASS_RESOURCE_CAPITALS = {"Alabama",     "Alaska",   "Phoenix",  "Little Rock",  "Sacramento",   "Denver",   "Hartford",     "Dover",    "Tallahassee",  "Atlanta",  "Honolulu", "Boise",    "Springfield",  "Indianapolis", "Des Moines",   "Topeka",   "Frankfort",    "Baton Rouge",  "Augusta",  "Annapolis",    "Boston",           "Lansing",  "Saint Paul",   "Jackson",      "Jefferson City",   "Helena",   "Lincoln",  "Carson City",  "Concord",          "Trenton",      "Santa Fe",     "Albany",   "Raleigh",          "Bismarck",     "Columbus", "Oklahoma City",    "Salem",    "Harrisburg",   "Providence",   "Columbia",         "Pierre",       "Nashville",    "Austin",   "Salt Lake City",   "Montpelier",   "Richmond", "Olympia",      "Charleston",       "Madison",      "Cheyenne"};
 
 	// mutable instance variable version of the above
-	private String[] capitals;
 	private String[] states;
+	private String[] capitals;
+	private int[] range = new int[2];    // this one is for optimization purposes - restricts the randomizer to non-null entries
 
 	public GameRunner(String name) {
 		this.name = name;
 		this.states = copy(CLASS_RESOURCE_STATES);
 		this.capitals = copy(CLASS_RESOURCE_CAPITALS);
+		updateRange();
 	}
 
 	public void greet() {
@@ -26,7 +28,44 @@ public class GameRunner {
 
 	// TODO request guess method
 
-	// TODO random entry picker
+	// gets a random state-capital combo in the format {state, capital}
+	private String[] getRandomEntry() {
+		// pick out an available index
+		int min = range[0];
+		int max = range[1];
+		int index = (int)(Math.random() * (max-min+1))+min;
+
+		// construct an array based on that choice
+		String[] entry = {
+				states[index],
+				capitals[index]
+		};
+
+		// destroy that entry
+		states[index] = null;
+		capitals[index] = null;
+
+		// clean up the mess the destruction left
+		consolidate(states);
+		consolidate(capitals);
+		updateRange();
+
+		// return the entry, which is the only remnant of the data beyond the class resource
+		return entry;
+	}
+
+	// updates the range variable - to be used ONLY after consolidation
+	private void updateRange() {
+		int[] temp = new int[2];
+		for(int i = 0; i < states.length; i++) {
+			if (states[i] != null) {
+				temp[1] = i;
+			} else {
+				break;
+			}
+		}
+		range = temp;
+	}
 
 	/*
 	 * While primitives have unchanging pointers to changing pieces of memory, object-typed variables simply change
@@ -41,5 +80,19 @@ public class GameRunner {
 		return temp;
 	}
 
-	// TODO array consolidator
+	// essentially shifts all the null indexes to the end of the array
+	private static String[] consolidate(String[] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] == null) {
+				for(int j = i; j < arr.length; j++) {
+					if (arr[j] != null) {
+						arr[i] = arr[j];
+						arr[j] = null;
+						break;
+					}
+				}
+			}
+		}
+		return arr;
+	}
 }
