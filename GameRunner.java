@@ -1,7 +1,4 @@
 public class GameRunner {
-	String name;
-	int streak = 0;
-
 	/*
 	 * this is an immutable inventory from which objects can copy
 	 * note to self - DO NOT ALTER (alter the instance vars instead)
@@ -14,6 +11,9 @@ public class GameRunner {
 	private String[] states;
 	private String[] capitals;
 	private int[] range = new int[2];    // this one is for optimization purposes - restricts the randomizer to non-null entries
+
+	String name;
+	int streak = 0;
 
 	public GameRunner(String name) {
 		this.name = name;
