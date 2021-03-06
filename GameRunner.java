@@ -1,4 +1,6 @@
-public class GameRunner {
+import java.util.Scanner;
+
+public class GameRunner extends Main {  // I made it a subclass to get easy access to my input system
 	/*
 	 * this is an immutable inventory from which objects can copy
 	 * note to self - DO NOT ALTER (alter the instance vars instead)
@@ -17,16 +19,45 @@ public class GameRunner {
 
 	public GameRunner(String name) {
 		this.name = name;
+		reset();
+	}
+
+	private void reset() {
 		this.states = copy(CLASS_RESOURCE_STATES);
 		this.capitals = copy(CLASS_RESOURCE_CAPITALS);
 		updateRange();
+		streak = 0;
 	}
 
 	public void greet() {
 		System.out.println("Welcome to the States-Capitals Game, " + name + "! You will be provided a state and will need to input the capital. If you get one wrong, game over. Can you guess all 50 states?\n");
 	}
 
-	// TODO request guess method
+	// public method which does one iteration of the game
+	public boolean doGuess() {
+		String[] entry = getRandomEntry();
+		System.out.println("State: " + entry[0]);
+		String guess = input("Capital(?): ");
+
+		boolean correct = guess.toLowerCase().equals(entry[1].toLowerCase());
+		if (correct) {
+			System.out.println("Correct!\n");
+			streak++;
+			return true;
+		} else {
+			System.out.println("GAME OVER\nCongratulations, you had a streak of " + streak + " correct answers.");
+			// if the input rules I specified are not followed, it will just default to "no"
+			if ("yes".equals(input("Would you like to play again? (yes/no): "))) {
+				System.out.println();
+				reset();
+				return true;
+			} else {
+				System.out.println("Goodbye!");
+				return false;
+			}
+		}
+	}
+
 
 	// gets a random state-capital combo in the format {state, capital}
 	private String[] getRandomEntry() {
