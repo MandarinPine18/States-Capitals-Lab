@@ -1,7 +1,4 @@
 public class GameRunner {
-	String name;
-	int streak = 0;
-
 	/*
 	 * this is an immutable inventory from which objects can copy
 	 * note to self - DO NOT ALTER (alter the instance vars instead)
@@ -15,6 +12,9 @@ public class GameRunner {
 	private String[] capitals;
 	private int[] range = new int[2];    // this one is for optimization purposes - restricts the randomizer to non-null entries
 
+	String name;
+	int streak = 0;
+
 	public GameRunner(String name) {
 		this.name = name;
 		this.states = copy(CLASS_RESOURCE_STATES);
@@ -23,7 +23,7 @@ public class GameRunner {
 	}
 
 	public void greet() {
-		System.out.println("Welcome to the States-Capitals Game, "+ name +"! You will be provided a state and will need to input the capital. If you get one wrong, game over. Can you guess all 50 states?\n");
+		System.out.println("Welcome to the States-Capitals Game, " + name + "! You will be provided a state and will need to input the capital. If you get one wrong, game over. Can you guess all 50 states?\n");
 	}
 
 	// TODO request guess method
