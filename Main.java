@@ -1,8 +1,7 @@
 import java.util.*;
 
 class Main {
-	// TODO add developer mode
-	public static final boolean DEVELOPER_MODE_ENABLED = false;
+	public static final boolean DEVELOPER_MODE_ENABLED = true;
 
 	public static final Scanner input = new Scanner(System.in);
 	public static void main(String[] args) {

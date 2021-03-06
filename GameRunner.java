@@ -7,7 +7,7 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 	private static final String[] CLASS_RESOURCE_STATES =   {"Montgomery",  "Juneau",   "Arizona",  "Arkansas",     "California",   "Colorado", "Connecticut",  "Delaware", "Florida",      "Georgia",  "Hawaii",   "Idaho",    "Illinois",     "Indiana",      "Iowa",         "Kansas",   "Kentucky",     "Louisiana",    "Maine",    "Maryland",     "Massachusetts",    "Michigan", "Minnesota",    "Mississippi",  "Missouri",         "Montana",  "Nebraska", "Nevada",       "New Hampshire",    "New Jersey",   "New Mexico",   "New York", "North Carolina",   "North Dakota", "Ohio",     "Oklahoma",         "Oregon",   "Pennsylvania", "Rhode Island", "South Carolina",   "South Dakota", "Tennessee",    "Texas",    "Utah",             "Vermont",      "Virginia", "Washington",   "West Virginia",    "Wisconsin",    "Wyoming"};
 	private static final String[] CLASS_RESOURCE_CAPITALS = {"Alabama",     "Alaska",   "Phoenix",  "Little Rock",  "Sacramento",   "Denver",   "Hartford",     "Dover",    "Tallahassee",  "Atlanta",  "Honolulu", "Boise",    "Springfield",  "Indianapolis", "Des Moines",   "Topeka",   "Frankfort",    "Baton Rouge",  "Augusta",  "Annapolis",    "Boston",           "Lansing",  "Saint Paul",   "Jackson",      "Jefferson City",   "Helena",   "Lincoln",  "Carson City",  "Concord",          "Trenton",      "Santa Fe",     "Albany",   "Raleigh",          "Bismarck",     "Columbus", "Oklahoma City",    "Salem",    "Harrisburg",   "Providence",   "Columbia",         "Pierre",       "Nashville",    "Austin",   "Salt Lake City",   "Montpelier",   "Richmond", "Olympia",      "Charleston",       "Madison",      "Cheyenne"};
 
-	// mutable instance variable version of the above
+	// mutable instance variable versions of the above
 	private String[] states;
 	private String[] capitals;
 	private int[] range = new int[2];    // this one is for optimization purposes - restricts the randomizer to non-null entries
@@ -38,9 +38,12 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 	public boolean doGuess() {
 		String[] entry = getRandomEntry();
 		System.out.println("State: " + entry[0]);
+		if(DEVELOPER_MODE_ENABLED) {
+			System.out.println("******** DEVMODE: Answer is " + entry[1] + " ********");
+		}
 		String guess = input("Capital(?): ");
 
-		boolean correct = guess.toLowerCase().equals(entry[1].toLowerCase());
+		boolean correct = guess.equalsIgnoreCase(entry[1]);
 		if (correct) {
 			System.out.println("Correct!\n");
 			streak++;
