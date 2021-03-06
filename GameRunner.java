@@ -26,6 +26,7 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 		this.capitals = copy(CLASS_RESOURCE_CAPITALS);
 		updateRange();
 		streak = 0;
+		System.out.println("-----------------------------------------------------------------------------------------");
 		System.out.println("Begin.");
 	}
 
