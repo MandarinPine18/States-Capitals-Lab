@@ -56,7 +56,7 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 		} else {
 			System.out.println("GAME OVER\nCongratulations, you had a streak of " + streak + " correct answers.");
 			// if the input rules I specified are not followed, it will just default to "no"
-			if ("yes".equals(input("Would you like to play again? (yes/no): "))) {
+			if ("yes".equalsIgnoreCase(input("Would you like to play again? (yes/no): "))) {
 				System.out.println();
 				reset();
 				return true;
