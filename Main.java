@@ -12,10 +12,10 @@ class Main {
 	public static void main(String[] args) throws Exception {
 		// This is a test of the backend data management. This call and the method definition should be commented out
 		// for the final version.
-
+		/*
 		if (DEVELOPER_MODE_ENABLED)
 			GameRunner.test();
-
+		*/
 
 		// request name
 		String name = input("Enter your name: ");

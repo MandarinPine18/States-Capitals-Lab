@@ -137,7 +137,7 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 
 	// This is a method written to test out the backend functionality. It will not be executed in the final version.
 	// If you want to run it, you will need to uncomment it here and at the method call in Main.main(String[] args)
-
+	/*
 	public static void test() throws Exception {
 		System.out.println("************************************************BEGIN TEST************************************************");
 
@@ -176,5 +176,5 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 
 		System.out.println("*************************************************END TEST*************************************************");
 	}
-
+	*/
 }
