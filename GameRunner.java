@@ -37,13 +37,18 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 	// public method which does one iteration of the game
 	public boolean doGuess() {
 		String[] entry = getRandomEntry();
-		System.out.println("State: " + entry[0]);
-		if(DEVELOPER_MODE_ENABLED) {
-			System.out.println("******** DEVMODE: Answer is " + entry[1] + " ********");
-		}
-		String guess = input("Capital(?): ");
+		boolean correct;
+		if (entry[0] != null) {
+			System.out.println("State: " + entry[0]);
+			if (DEVELOPER_MODE_ENABLED) {
+				System.out.println("******** DEVMODE: Answer is " + entry[1] + " ********");
+			}
+			String guess = input("Capital(?): ");
 
-		boolean correct = guess.equalsIgnoreCase(entry[1]);
+			correct = guess.equalsIgnoreCase(entry[1]);
+		} else {
+			correct = false;
+		}
 		if (correct) {
 			System.out.println("Correct!\n");
 			streak++;
@@ -129,4 +134,47 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 			}
 		}
 	}
+
+	// This is a method written to test out the backend functionality. It will not be executed in the final version.
+	// If you want to run it, you will need to uncomment it here and at the method call in Main.main(String[] args)
+
+	public static void test() throws Exception {
+		System.out.println("************************************************BEGIN TEST************************************************");
+
+		GameRunner test = new GameRunner("test");
+		String[] allStates = new String[50];  // should contain no duplicates
+
+		// randomly get and log the state part of entries
+		for(int i = 0; i < allStates.length; i++){
+			allStates[i] = test.getRandomEntry()[0];
+		}
+
+		// check for duplicates
+		for(int i = 0; i < allStates.length-1; i++) {
+			for (int j = i+1; j < allStates.length; j++) {
+				if(allStates[i].equals(allStates[j])) {
+					throw new Exception("Duplicate produced by randomizer");
+				}
+			}
+		}
+
+		// ensure all used entries were destroyed
+		for(String val: test.states) {
+			if (val != null) {
+				throw new Exception("States array not emptied");
+			}
+		}
+
+		for(String val: test.capitals) {
+			if (val != null) {
+				throw new Exception("Capitals array not emptied");
+			}
+		}
+
+		// if we get this far without an error, things are working right
+		System.out.println("System checked - backend data management functional");
+
+		System.out.println("*************************************************END TEST*************************************************");
+	}
+
 }
