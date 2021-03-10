@@ -45,6 +45,7 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 				System.out.println("******** DEVMODE: Answer is " + entry[1] + " ********");
 				guess = entry[1];
 			} else {
+				// this uses a method I defined, Main.input(String), to simplify input
 				guess = input("Capital(?): ");
 			}
 
