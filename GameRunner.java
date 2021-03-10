@@ -114,7 +114,7 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 	 */
 	private static String[] copy(String[] arr) {
 		String[] temp = new String[arr.length];
-		for(int index = 0; index < arr.length-1; index++) {
+		for(int index = 0; index < arr.length; index++) {
 			temp[index] = arr[index];
 		}
 		return temp;
