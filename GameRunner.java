@@ -59,7 +59,11 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 			streak++;
 			return true;
 		} else {
-			System.out.println("GAME OVER\nCongratulations, you had a streak of " + streak + " correct answers.");
+			if (streak == 50) { // correct is false because the user gets all 50 questions correct
+				System.out.println("Congratulations, you have answered all 50 questions correctly!");
+			} else {            // correct is false because the user got a question wrong
+				System.out.println("GAME OVER\nCongratulations, you had a streak of " + streak + " correct answers.");
+			}
 			// if the input rules I specified are not followed, it will just default to "no"
 			if ("yes".equalsIgnoreCase(input("Would you like to play again? (yes/no): "))) {
 				System.out.println();
