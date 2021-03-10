@@ -40,15 +40,19 @@ public class GameRunner extends Main {  // I made it a subclass to get easy acce
 		boolean correct;
 		if (entry[0] != null) {
 			System.out.println("State: " + entry[0]);
+			String guess;
 			if (DEVELOPER_MODE_ENABLED) {
 				System.out.println("******** DEVMODE: Answer is " + entry[1] + " ********");
+				guess = entry[1];
+			} else {
+				guess = input("Capital(?): ");
 			}
-			String guess = input("Capital(?): ");
 
 			correct = guess.equalsIgnoreCase(entry[1]);
 		} else {
 			correct = false;
 		}
+
 		if (correct) {
 			System.out.println("Correct!\n");
 			streak++;
